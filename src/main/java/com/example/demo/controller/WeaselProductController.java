@@ -19,9 +19,15 @@ public class WeaselProductController {
     }
 
     @GetMapping("/add")
-    public List<Product> addProduct(@RequestParam(value = "name", defaultValue = "World") String name,
+    public List<Product> addProductByGet(@RequestParam(value = "name", defaultValue = "World") String name,
                                     @RequestParam(value = "price", defaultValue = "0") int price){
         pm.addProduct(new Product(0, name, price));
+        return pm.getDatas();
+    }
+
+    @PostMapping("/add")
+    public List<Product> addProductByPost(@RequestBody Product p){
+        pm.addProduct(p);
         return pm.getDatas();
     }
 
